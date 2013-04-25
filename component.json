@@ -1,0 +1,9 @@
+{
+  "name": "block",
+  "description": "Block-based HTML templating",
+  "version": "0.0.1",
+  "main": "index.js",
+  "scripts": [
+    "index.js"
+  ]
+}

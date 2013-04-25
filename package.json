@@ -1,0 +1,12 @@
+{
+  "name": "block",
+  "description": "Block-based HTML templating",
+  "version": "0.0.1",
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*"
+  },
+  "scripts": {
+    "test": "make test"
+  }
+}

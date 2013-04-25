@@ -1,4 +1,4 @@
-# Block.js
+# Block.js [![Build Status](https://travis-ci.org/funraiseme/block.png)](https://travis-ci.org/funraiseme/block)
 
 Ridiculously simple HTML templating. All it does is replaces "blocks" in your template with a local.
 

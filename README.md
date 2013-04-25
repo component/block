@@ -14,6 +14,14 @@ block(html).render({
 })
 ```
 
+yields:
+
+```html
+<div class="container">
+  <div class="inner"></div>
+</div>
+```
+
 That's it. HTML templating doesn't have to be any harder.
 
 ## API
@@ -43,13 +51,13 @@ template.render({
 This is for nodejs only. `file` is the name of the file, `minify` strips whitespace.
 
 ```js
-var template = block.read(__dirname + '/template.html')
+var template = block.read(__dirname + '/template.html', false)
 template.render({
   content: ''
 })
 ```
 
-All `minfy` does, if `true`, is `block = block.replace(/\n\s*/, '')`.
+All `minify` does, if `true`, is `html = html.replace(/\n\s*/, '')`.
 
 ## License
 

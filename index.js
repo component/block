@@ -38,9 +38,6 @@ try {
 
   Block.read = function (filename, minify) {
     var string = fs.readFileSync(filename, 'utf8')
-    if (minify)
-      string = string.replace(/\n\s*/g, '')
-
-    return new Block(string)
+    return new Block(minify ? string.replace(/\n\s*/g, '') : string)
   }
 } catch (err) {}

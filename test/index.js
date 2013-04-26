@@ -37,6 +37,10 @@ describe('Block', function () {
     }).should.equal('<div>a</div>\n<div>b</div>')
   })
 
+  it('should work without locals', function () {
+    block('<div></div>').render().should.equal('<div></div>')
+  })
+
   it('should optionally minify files', function () {
     block.read(file, true).render({
       first: 'a',

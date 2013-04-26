@@ -16,9 +16,34 @@ function Block(string) {
       names[i] = block.match(/(\w+)/)[0]
 }
 
+Block.prototype.local = function (name, value) {
+  var names = this.names
+  var j
+
+  for (var i in names)
+    if (names[i] === name && names.hasOwnProperty(i))
+      j = i
+
+  if (j == null)
+    throw new Error('Name ' + name + ' is not defined.')
+
+  delete names[j]
+  this.blocks[j] = value || ''
+
+  return this
+}
+
+Block.prototype.locals = function (object) {
+  for (var name in object)
+    if (object.hasOwnProperty(name))
+      this.local(name, object[name])
+
+  return this
+}
+
 Block.prototype.render = function (locals) {
   locals = locals || {}
-  
+
   var blocks = this.blocks
   var names = this.names
 

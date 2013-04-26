@@ -9,27 +9,24 @@ function Block(string) {
   var blocks = this.blocks = string.split(regex)
   var names = this.names = {}
 
-  for (var i = 0, l = blocks.length; i < l; i++) {
-    var block = blocks[i]
-    if (regex.test(block)) {
+  var block
+
+  for (var i = 0, l = blocks.length; i < l; i++)
+    if (regex.test(block = blocks[i]))
       names[i] = block.match(/(\w+)/)[0]
-      blocks[i] = null
-    }
-  }
 }
 
 Block.prototype.render = function (locals) {
   var blocks = this.blocks
   var names = this.names
-  var l = blocks.length
-  var buf = new Array(l)
 
+  var html = ''
   var name
 
-  for (var i = 0; i < l; i++)
-    buf[i] = (name = names[i]) ? locals[name] : blocks[i]
+  for (var i = 0, l = blocks.length; i < l; i++)
+    html += (name = names[i]) ? locals[name] : blocks[i]
 
-  return buf.join('')
+  return html
 }
 
 // Node only!

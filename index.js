@@ -17,6 +17,8 @@ function Block(string) {
 }
 
 Block.prototype.render = function (locals) {
+  locals = locals || {}
+  
   var blocks = this.blocks
   var names = this.names
 

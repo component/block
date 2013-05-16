@@ -212,27 +212,51 @@ function Block(string) {
   var blocks = this.blocks = string.split(regex)
   var names = this.names = {}
 
-  for (var i = 0, l = blocks.length; i < l; i++) {
-    var block = blocks[i]
-    if (regex.test(block)) {
+  var block
+
+  for (var i = 0, l = blocks.length; i < l; i++)
+    if (regex.test(block = blocks[i]))
       names[i] = block.match(/(\w+)/)[0]
-      blocks[i] = null
-    }
-  }
+}
+
+Block.prototype.local = function (name, value) {
+  var names = this.names
+  var j
+
+  for (var i in names)
+    if (names[i] === name && names.hasOwnProperty(i))
+      j = i
+
+  if (j == null)
+    throw new Error('Name ' + name + ' is not defined.')
+
+  delete names[j]
+  this.blocks[j] = value || ''
+
+  return this
+}
+
+Block.prototype.locals = function (object) {
+  for (var name in object)
+    if (object.hasOwnProperty(name))
+      this.local(name, object[name])
+
+  return this
 }
 
 Block.prototype.render = function (locals) {
+  locals = locals || {}
+
   var blocks = this.blocks
   var names = this.names
-  var l = blocks.length
-  var buf = new Array(l)
 
+  var html = ''
   var name
 
-  for (var i = 0; i < l; i++)
-    buf[i] = (name = names[i]) ? locals[name] : blocks[i]
+  for (var i = 0, l = blocks.length; i < l; i++)
+    html += (name = names[i]) ? locals[name] : blocks[i]
 
-  return buf.join('')
+  return html
 }
 
 // Node only!
@@ -241,12 +265,10 @@ try {
 
   Block.read = function (filename, minify) {
     var string = fs.readFileSync(filename, 'utf8')
-    if (minify)
-      string = string.replace(/\n\s*/g, '')
-
-    return new Block(string)
+    return new Block(minify ? string.replace(/\n\s*/g, '') : string)
   }
 } catch (err) {}
+
 });
 require.alias("block/index.js", "block/index.js");
 
@@ -255,5 +277,5 @@ if (typeof exports == "object") {
 } else if (typeof define == "function" && define.amd) {
   define(function(){ return require("block"); });
 } else {
-  window["block"] = require("block");
+  this["block"] = require("block");
 }})();

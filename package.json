@@ -1,7 +1,7 @@
 {
   "name": "block",
   "description": "Block-based HTML templating",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "devDependencies": {
     "mocha": "*",
     "should": "*"
@@ -23,5 +23,5 @@
     "url": "https://github.com/funraiseme/block/issues",
     "email": "me@jongleberry.com"
   },
-  "license": "WTFPL"
+  "license": "MIT"
 }

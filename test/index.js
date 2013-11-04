@@ -59,9 +59,15 @@ describe('Block', function () {
     }).should.equal('<div>a</div><div>b</div>')
   })
 
-  it('should not work with non-word names', function () {
+  it('should default to the empty string', function () {
+    block('<div>{{hello}}</div>').render({
+      hello: false
+    }).should.equal('<div></div>')
+  })
+
+  it('should work with non-word names', function () {
     block('<div>{{hell.oh}}</div>').render({
-      hello: 'a'
-    }).should.equal('<div>{{hell.oh}}</div>')
+      'hell.oh': 'a'
+    }).should.equal('<div>a</div>')
   })
 })

@@ -49,7 +49,11 @@ try {
 
 function replace(string, key, value) {
   return string.replace(
-    new RegExp('\\{\\{\\s*' + key + '\\s*\\}\\}', 'g'),
-    value
+    new RegExp('\\{\\{\\s*' + escapeRegExp(key) + '\\s*\\}\\}', 'g'),
+    value || ''
   )
+}
+
+function escapeRegExp(str) {
+  return str.replace(/([.*+?=^!:${}()|[\]\/\\])/g, '\\$1')
 }

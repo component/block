@@ -1,7 +1,7 @@
 {
   "name": "block",
   "description": "Block-based HTML templating",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "devDependencies": {
     "mocha": "*",
     "should": "*"

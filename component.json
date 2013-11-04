@@ -1,0 +1,10 @@
+{
+  "name": "block",
+  "description": "Block-based HTML templating",
+  "version": "0.1.2",
+  "scripts": [
+    "index.js"
+  ],
+  "repo": "funraiseme/block",
+  "license": "MIT"
+}

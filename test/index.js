@@ -41,12 +41,6 @@ describe('Block', function () {
     }).render().should.equal('<div>a</div>')
   })
 
-  it('should throw if a template local is not defined', function () {
-    ;(function () {
-      block('<div></div>').local('first', 'asdfasdf')
-    }).should.throw()
-  })
-
   it('should work with files', function () {
     block.read(file).render({
       first: 'a',

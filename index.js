@@ -1,59 +1,40 @@
-var regex = /(\{\{\s*\w+\s*\}\})/
-
 module.exports = Block
 
 function Block(string) {
   if (!(this instanceof Block))
     return new Block(string)
 
-  var blocks = this.blocks = string.split(regex)
-  var names = this.names = {}
-
-  var block
-
-  for (var i = 0, l = blocks.length; i < l; i++)
-    if (regex.test(block = blocks[i]))
-      names[i] = block.match(/(\w+)/)[0]
+  this.string = string
 }
 
+Block.prototype.locals =
 Block.prototype.local = function (name, value) {
-  var names = this.names
-  var j
-
-  for (var i in names)
-    if (names[i] === name && names.hasOwnProperty(i))
-      j = i
-
-  if (j == null)
-    throw new Error('Name ' + name + ' is not defined.')
-
-  delete names[j]
-  this.blocks[j] = value || ''
+  if (typeof name === 'object')
+    Object.keys(name).forEach(function (key) {
+      this.replace(key, name[key])
+    }, this)
+  else
+    this.replace(name, value)
 
   return this
 }
 
-Block.prototype.locals = function (object) {
-  for (var name in object)
-    if (object.hasOwnProperty(name))
-      this.local(name, object[name])
+Block.prototype.replace = function (key, value) {
+  this.string = replace(this.string, key, value)
 
   return this
 }
 
 Block.prototype.render = function (locals) {
-  locals = locals || {}
+  if (typeof locals === 'object') {
+    var string = this.string
+    Object.keys(locals).forEach(function (key) {
+      string = replace(string, key, locals[key])
+    })
+    return string
+  }
 
-  var blocks = this.blocks
-  var names = this.names
-
-  var html = ''
-  var name
-
-  for (var i = 0, l = blocks.length; i < l; i++)
-    html += (name = names[i]) ? locals[name] : blocks[i]
-
-  return html
+  return this.string
 }
 
 // Node only!
@@ -65,3 +46,10 @@ try {
     return new Block(minify ? string.replace(/\n\s*/g, '') : string)
   }
 } catch (err) {}
+
+function replace(string, key, value) {
+  return string.replace(
+    new RegExp('\\{\\{\\s*' + key + '\\s*\\}\\}', 'g'),
+    value
+  )
+}

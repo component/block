@@ -46,19 +46,6 @@ template.render({
 }) === '<div class="container"><a href="#">click me</a></div>'
 ```
 
-### Block.read(file, minify)
-
-This is for nodejs only. `file` is the name of the file, `minify` strips whitespace.
-
-```js
-var template = block.read(__dirname + '/template.html', false)
-template.render({
-  content: ''
-})
-```
-
-All `minify` does, if `true`, is `html = html.replace(/\n\s*/, '')`.
-
 ## License
 
 The MIT License (MIT)

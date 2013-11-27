@@ -26,26 +26,15 @@ Block.prototype.replace = function (key, value) {
 }
 
 Block.prototype.render = function (locals) {
-  if (typeof locals === 'object') {
-    var string = this.string
-    Object.keys(locals).forEach(function (key) {
-      string = replace(string, key, locals[key])
-    })
-    return string
-  }
+  if (!locals)
+    return this.string
 
-  return this.string
+  var string = this.string
+  Object.keys(locals).forEach(function (key) {
+    string = replace(string, key, locals[key])
+  })
+  return string
 }
-
-// Node only!
-try {
-  var fs = require('fs')
-
-  Block.read = function (filename, minify) {
-    var string = fs.readFileSync(filename, 'utf8')
-    return new Block(minify ? string.replace(/\n\s*/g, '') : string)
-  }
-} catch (err) {}
 
 function replace(string, key, value) {
   return string.replace(

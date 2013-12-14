@@ -1,7 +1,7 @@
 {
   "name": "block",
-  "description": "Block-based HTML templating",
-  "version": "0.2.0",
+  "description": ".replace('{{block}}', string)",
+  "version": "0.2.1",
   "devDependencies": {
     "mocha": "*",
     "should": "*"
@@ -17,10 +17,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/funraiseme/block.git"
+    "url": "https://github.com/component/block.git"
   },
   "bugs": {
-    "url": "https://github.com/funraiseme/block/issues",
+    "url": "https://github.com/component/block/issues",
     "email": "me@jongleberry.com"
   },
   "license": "MIT"

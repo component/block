@@ -1,6 +1,7 @@
-# Block.js [![Build Status](https://travis-ci.org/funraiseme/block.png)](https://travis-ci.org/funraiseme/block)
+# Block.js [![Build Status](https://travis-ci.org/component/block.png)](https://travis-ci.org/component/block)
 
-Ridiculously simple HTML templating. All it does is replaces "blocks" in your template with a local.
+Ridiculously simple HTML templating.
+All it does is replaces "blocks" in your template with a local.
 
 ```html
 <div class="container">
@@ -26,7 +27,7 @@ That's it. HTML templating doesn't have to be any harder.
 
 ## API
 
-### Block(html)
+### var template = Block(html)
 
 ```js
 var block = require('block')
